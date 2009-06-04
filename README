@@ -25,7 +25,13 @@ placeholder text when DEBUG is set to True, the app depends on ``markup`` and
         'content_blocks',
     )
 
-After running ./manage.py syncdb app will be ready to use.
+The second step is to include content_blocks.urls in your urls.py:
+
+    urlpatterns = patterns('',
+        turl(_(r'^content-blocks/'), include('content_blocks.urls')),
+    )
+
+After running ./manage.py syncdb, app will be ready to use.
 
 
 Template Tags
