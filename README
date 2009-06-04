@@ -1,0 +1,51 @@
+Content Blocks
+==============
+
+This application provides a model and the necessary template tags for defining
+editable content block areas in the templates. Without any need for initial
+data, it can generate the blocks in the database when required. It also
+provides an "Edit" link next to the blocks. If JavaScript is enabled and the
+included JS class is loaded, these links enable AJAX-based, inline editing
+of content right in the page. Otherwise, they become simple links to the admin
+area of the selected block.
+
+
+Installation
+------------
+
+To install Content Blocks, include it in your ``INSTALLED_APPS`` list, under
+your project's settings.py file. To render the content using markdown and show
+placeholder text when DEBUG is set to True, the app depends on ``markup`` and
+``webdesign`` applications, included in ``django.contrib``:
+
+    INSTALLED_APPS = (
+        'django.contrib.markup',
+        'django.contrib.webdesign',
+        
+        'content_blocks',
+    )
+
+After running ./manage.py syncdb app will be ready to use.
+
+
+Template Tags
+-------------
+
+Content Blocks can only be used through template tags. To define a block,
+simply load the tag library and call it as such:
+
+    {% load content_blocks_tags %}
+    {% show_content_block "about" %}
+
+``show_content_block`` only requires the unique identifier name of the block
+by default. You can also provide two optional parameters, ``editable`` and
+``markup``. If ``editable`` is set to "False", the edit link is omitted.
+Similarly, if ``markup`` is set to "False", markdown is not applied to the 
+content:
+
+    {% show_content_block "about" "False" "False" %}
+
+To enable JavaScript functionality, you should also load the necessary JS
+files through the ``load_content_block_js`` template tag:
+
+    {% block javascript %}{% load_content_block_js %}{% endblock %}
