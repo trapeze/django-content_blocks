@@ -4,6 +4,7 @@ from django.views.generic import simple
 
 from content_blocks.forms import ContentBlockForm
 from content_blocks.models import ContentBlockCore, ContentBlock
+from content_blocks.utils import get_admin_edit_page
 
 
 @permission_required("content_blocks.contentblock")
@@ -45,9 +46,4 @@ def edit(request, name):
             "block": block,
         })
     else:
-        return simple.redirect_to(
-            request, "/%(lang)s/admin/content_blocks/contentblock/%(id)d/" % {
-                "lang": request.LANGUAGE_CODE,
-                "id": block.pk,
-            }
-        )
+        return simple.redirect_to(request, get_admin_edit_page(block))
