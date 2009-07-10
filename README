@@ -14,16 +14,25 @@ Installation
 ------------
 
 To install Content Blocks, include it in your ``INSTALLED_APPS`` list, under
-your project's settings.py file. To render the content using markdown and show
-placeholder text when DEBUG is set to True, the app depends on ``markup`` and
-``webdesign`` applications, included in ``django.contrib``:
+your project's settings.py file.
+
+To render the content using markdown and show placeholder text when DEBUG is set
+to True, the app depends on ``markup`` and ``webdesign`` applications,
+included in ``django.contrib``:
 
     INSTALLED_APPS = (
         'django.contrib.markup',
         'django.contrib.webdesign',
-        
+
         'content_blocks',
     )
+
+You will also have to create a symbolic link called `content_blocks` in your
+`MEDIA_ROOT` folder. It should link to `content_blocks/media`. For example:
+
+    cd <path-to-project-media--root-folder>
+    ln -s <path-to-content-blocks>/media/ content_blocks
+
 
 The second step is to include content_blocks.urls in your urls.py:
 
@@ -46,7 +55,7 @@ simply load the tag library and call it as such:
 ``show_content_block`` only requires the unique identifier name of the block
 by default. You can also provide two optional parameters, ``editable`` and
 ``markup``. If ``editable`` is set to "False", the edit link is omitted.
-Similarly, if ``markup`` is set to "False", markdown is not applied to the 
+Similarly, if ``markup`` is set to "False", markdown is not applied to the
 content:
 
     {% show_content_block "about" "False" "False" %}
