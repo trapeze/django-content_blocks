@@ -1,14 +1,14 @@
 from django.conf import settings
-from django.contrib import admin
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils import translation
 
-from multilang.urlresolvers import reverse_for_language
 from content_blocks.models import ContentBlockCore, ContentBlock
+from multilang.urlresolvers import reverse_for_language
+from test_helper.utils import TestHelper
 
 
-class ContentBlocksTests(TestCase):
+class ContentBlocksTests(TestHelper, TestCase):
 
     def setUp(self):
         self.user = User.objects.create(username='test',
@@ -31,17 +31,12 @@ class ContentBlocksTests(TestCase):
                 kwargs={'name':'test',}
             )
             response = self.client.get(url)
-
-            admin_base_url = reverse_for_language(admin.site.root, lang=lang[0],
-                args=('',)
-            )
-            expected = u'%scontent_blocks/contentblock/%d/' % (admin_base_url,
-                block.pk
-            )
+            translation.activate(lang[0])
+            expected = self.getAdminEditPage(block)
             self.assertRedirects(response, expected, status_code=301)
 
     def testEditNonExistentBlock(self):
-        for lang in settings.LANGUAGES:
+        for lang in settings.LANGUAGES[1:]:
             translation.activate(lang[0])
             name = u'test-%s' % lang[0]
             url = reverse_for_language('content_blocks_edit', lang=lang[0],
@@ -50,12 +45,8 @@ class ContentBlocksTests(TestCase):
             response = self.client.get(url)
 
             block = ContentBlock.objects.get(language=lang[0], core__name=name)
-
-            admin_base_url = reverse_for_language(admin.site.root, lang=lang[0],
-                args=('',)
-            )
-            expected = u'%scontent_blocks/contentblock/%d/' % (admin_base_url,
-                block.pk
-            )
+            
+            translation.activate(lang[0])
+            expected = self.getAdminEditPage(block)
             self.assertRedirects(response, expected, status_code=301)
             translation.deactivate()
