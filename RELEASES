@@ -1,33 +1,20 @@
-content_blocks-UNRELEASED
-=========================
+content_blocks-0.1.2STABLE
+==========================
 
-Tagged on December ???, 2009 by ??? <???@trapeze.com>
+Tagged on February 9, 2010 by Sam Bull <sbull@trapeze.com>
 
+Bugs Fixed
+----------
 
-Major Code Changes
-------------------
-* TODO
-
-
-Bugs Fixes and Small Enhancements
----------------------------------
+* D001011-230 - admin url lookup doesn't support new Django 1.1 admin URLs
 * D001011-197: content_blocks: Does not check for dependencies
 
-
-Upgrade Instructions
---------------------
-* None
-
-
-Known issues
+Known Issues
 ------------
-* None
 
-
+None
 
 * * *
-
-
 
 content_blocks-0.1.1FINAL
 =========================
