@@ -23,12 +23,12 @@ class ContentBlocksTests(TestCase):
     def testEditExistingBlock(self):
         core = ContentBlockCore.objects.create(name='test')
 
-        for lang in settings.LANGUAGES:
+        for language, language_name in settings.LANGUAGES:
             block = ContentBlock.objects.create(core=core,
-                language=lang[0],
+                language=language,
             )
 
-            url = reverse_for_language('content_blocks_edit', lang=lang[0],
+            url = reverse_for_language('content_blocks_edit', lang=language,
                 kwargs={'name':'test',}
             )
             response = self.client.get(url)
@@ -40,19 +40,19 @@ class ContentBlocksTests(TestCase):
             self.assertRedirects(response, expected, status_code=301)
 
     def testEditNonExistentBlock(self):
-        for lang in settings.LANGUAGES[1:]:
-            translation.activate(lang[0])
-            name = u'test-%s' % lang[0]
-            url = reverse_for_language('content_blocks_edit', lang=lang[0],
+        for language, language_name in settings.LANGUAGES:
+            translation.activate(language)
+            name = u'test-%s' % language
+            url = reverse_for_language('content_blocks_edit', lang=language,
                 kwargs={'name':name,}
             )
             response = self.client.get(url)
 
-            block = ContentBlock.objects.get(language=lang[0], core__name=name)
-            
+            block = ContentBlock.objects.get(language=language, core__name=name)
+
             expected = reverse_for_language(
                     'admin:content_blocks_contentblock_change',
-                    lang=lang[0],
+                    lang=language,
                     args=(block.pk,))
             self.assertRedirects(response, expected, status_code=301)
             translation.deactivate()
