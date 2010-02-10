@@ -1,14 +1,15 @@
 from django.conf import settings
+from django.contrib import admin
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils import translation
 
-from content_blocks.models import ContentBlockCore, ContentBlock
 from multilang.urlresolvers import reverse_for_language
-from test_helper.utils import TestHelper
+
+from content_blocks.models import ContentBlockCore, ContentBlock
 
 
-class ContentBlocksTests(TestHelper, TestCase):
+class ContentBlocksTests(TestCase):
 
     def setUp(self):
         self.user = User.objects.create(username='test',
@@ -31,8 +32,11 @@ class ContentBlocksTests(TestHelper, TestCase):
                 kwargs={'name':'test',}
             )
             response = self.client.get(url)
-            translation.activate(lang[0])
-            expected = self.getAdminEditPage(block)
+
+            expected = reverse_for_language(
+                    'admin:content_blocks_contentblock_change',
+                    lang=language,
+                    args=(block.pk,))
             self.assertRedirects(response, expected, status_code=301)
 
     def testEditNonExistentBlock(self):
@@ -46,7 +50,9 @@ class ContentBlocksTests(TestHelper, TestCase):
 
             block = ContentBlock.objects.get(language=lang[0], core__name=name)
             
-            translation.activate(lang[0])
-            expected = self.getAdminEditPage(block)
+            expected = reverse_for_language(
+                    'admin:content_blocks_contentblock_change',
+                    lang=lang[0],
+                    args=(block.pk,))
             self.assertRedirects(response, expected, status_code=301)
             translation.deactivate()

@@ -3,7 +3,6 @@ from django.core.exceptions import ImproperlyConfigured
 
 
 REQUIRED_APPS = (
-    'test_helper',
     'django.contrib.markup',
     'django.contrib.webdesign',
 )
