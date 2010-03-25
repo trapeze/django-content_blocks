@@ -1,3 +1,22 @@
+content_blocks-0.1.3RC
+======================
+
+Tagged on March 25, 2010 by Dieter Limeback <dlimeback@trapeze.com>
+
+Minor Changes
+-------------
+
+* R001011-119   Add ability to specify amount of lorem ipsum text
+
+Known Issues
+------------
+
+None
+
+
+* * *
+
+
 content_blocks-0.1.2STABLE
 ==========================
 
