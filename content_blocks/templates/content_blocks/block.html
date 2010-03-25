@@ -1,19 +1,27 @@
 {% load i18n markup webdesign %}
 
 {% if markup %}<div class="content_block">{% endif %}
+
 {% if perms.content_blocks and editable %}
-<a href="{% if block %}{% url content_blocks_edit block.name %}{% else %}{% url content_blocks_edit name %}{% endif %}" class="content-block-edit">
-    {% trans "Edit" %}
-</a>
+    <a href="{% if block %}{% url content_blocks_edit block.name %}{% else %}{% url content_blocks_edit name %}{% endif %}" class="content-block-edit">{% trans "Edit" %}</a>
 {% endif %}
 
 {% if block.content %}
-{% if markup %}
-{{ block.content|markdown }}
+    {% if markup %}
+        {{ block.content|markdown }}
+    {% else %}
+        {{ block.content }}
+    {% endif %}
 {% else %}
-{{ block.content }}
+    {% if DEBUG %}
+        {% if markup %}<p>{% endif %}
+        {% if amount %}
+            {% lorem amount w %}
+        {% else %}
+            {% lorem %}
+        {% endif %}
+        {% if markup %}</p>{% endif %}
+    {% endif %}
 {% endif %}
-{% else %}
-{% if DEBUG %}{% if markup %}<p>{% lorem %}</p>{% else %}{% lorem %}{% endif %}{% endif %}
-{% endif %}
+
 {% if markup %}</div>{% endif %}

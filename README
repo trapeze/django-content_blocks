@@ -52,13 +52,16 @@ simply load the tag library and call it as such:
     {% load content_blocks_tags %}
     {% show_content_block "about" %}
 
-``show_content_block`` only requires the unique identifier name of the block
-by default. You can also provide two optional parameters, ``editable`` and
-``markup``. If ``editable`` is set to "False", the edit link is omitted.
-Similarly, if ``markup`` is set to "False", markdown is not applied to the
-content:
+``show_content_block`` only requires the unique identifier name of the block by
+default. You can also provide three optional parameters: ``editable``,
+``markup``, and ``amount``. If ``editable`` is set to "False", the edit link is
+omitted. Similarly, if ``markup`` is set to "False", markdown is not applied to
+the content. If ``amount`` is set to a number (or variable representing a
+number) and there is no content for the block in the database, you will get
+that many words of "lorem" text (if omitted or set to an empty string, you will
+get the standard paragraph of approximately 70 words).
 
-    {% show_content_block "about" "False" "False" %}
+    {% show_content_block "about" "False" "False" 7 %}
 
 To enable JavaScript functionality, you should also load the necessary JS
 files through the ``load_content_block_js`` template tag:
