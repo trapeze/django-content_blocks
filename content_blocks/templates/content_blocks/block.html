@@ -2,10 +2,6 @@
 
 {% if markup %}<div class="content_block">{% endif %}
 
-{% if perms.content_blocks and editable %}
-    <a href="{% if block %}{% url content_blocks_edit block.name %}{% else %}{% url content_blocks_edit name %}{% endif %}" class="content-block-edit">{% trans "Edit" %}</a>
-{% endif %}
-
 {% if block.content %}
     {% if markup %}
         {{ block.content|markdown }}
@@ -22,6 +18,10 @@
         {% endif %}
         {% if markup %}</p>{% endif %}
     {% endif %}
+{% endif %}
+
+{% if perms.content_blocks and editable %}
+    <p><a href="{% if block %}{% url content_blocks_edit block.name %}{% else %}{% url content_blocks_edit name %}{% endif %}" class="content-block-edit">{% trans "Edit" %}</a></p>
 {% endif %}
 
 {% if markup %}</div>{% endif %}

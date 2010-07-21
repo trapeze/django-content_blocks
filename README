@@ -63,7 +63,5 @@ get the standard paragraph of approximately 70 words).
 
     {% show_content_block "about" "False" "False" 7 %}
 
-To enable JavaScript functionality, you should also load the necessary JS
-files through the ``load_content_block_js`` template tag:
-
-    {% block javascript %}{% load_content_block_js %}{% endblock %}
+To enable JavaScript functionality, you should import the JS enhancement app for
+content blocks.
