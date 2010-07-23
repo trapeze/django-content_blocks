@@ -10,6 +10,3 @@ class ContentBlockForm(forms.ModelForm):
     class Meta:
         model = ContentBlock
         fields = ("content", )
-
-    class Media:
-        js = ("content_blocks/js/content-block.js", )

@@ -27,6 +27,7 @@ def edit(request, name):
 
                 return simple.direct_to_template(request, "content_blocks/block.html", extra_context={
                     "block": block,
+                    "content_mode": True,
                     "editable": True,
                     "markup": True,
                     "DEBUG": settings.DEBUG,
@@ -34,6 +35,7 @@ def edit(request, name):
         elif request.GET.has_key("cancel"):
             return simple.direct_to_template(request, "content_blocks/block.html", extra_context={
                 "block": block,
+                "just_content": True,
                 "editable": True,
                 "markup": True,
                 "DEBUG": settings.DEBUG,

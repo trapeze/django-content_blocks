@@ -1,27 +1,20 @@
-projectname-UNRELEASED
-======================
+content_blocks-1.0.0ALPHA
+=========================
 
-Tagged on TODO by TODO <TODO@trapeze.com>
+Tagged on July 23, 2010 by Teddy Hwang <thwang@trapeze.com>
 
 Major Code Changes
 ------------------
 
-None
+* Removed JavaScript enhancements from Django App
+* Optimized HTML to reflect best practices
+* AJAX calls were rendering the entire block.html - added in conditional requirement for which part of the HTML was rendered
 
 Bugs Fixes and Small Enhancements
 ---------------------------------
 
-None
+* Updated README to reflect changes listed above
 
-Upgrade Instructions
---------------------
-
-None
-
-Known issues
-------------
-
-TODO
 
 * * *
 

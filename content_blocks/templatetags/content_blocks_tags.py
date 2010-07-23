@@ -38,13 +38,3 @@ def show_content_block(context, name, editable=True, markup=True, amount=''):
         "MEDIA_URL": context.get("MEDIA_URL", None),
         "DEBUG": settings.DEBUG,
     }
-
-
-@register.simple_tag
-def load_content_block_js():
-    """
-    Renders the JavaScript elements required for a ``ContentBlockForm``
-    """
-    form = ContentBlockForm()
-
-    return form.media["js"]

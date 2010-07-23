@@ -1,6 +1,7 @@
 {% load i18n %}
 
 <form method="post" action="{% url content_blocks_edit block.name %}">
-    {{ form.as_p }}
+    <p><label>{{ form.content.label }}</label></p>
+    <p>{{ form.content }}</p>
     <p class="content-block-action"><input type="submit" value="{% trans "Save" %}" /> or <a href="javascript:void(0);" class="content-block-cancel">{% trans "Cancel" %}</a></p>
 </form>

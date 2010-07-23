@@ -1,6 +1,6 @@
 {% load i18n markup webdesign %}
 
-{% if markup %}<div class="content-block">{% endif %}
+{% if not content_mode %}<div{% if perms.content_blocks and editable %} class="content-block"{% endif %}>{% endif %}
 
 {% if block.content %}
     {% if markup %}
@@ -24,4 +24,4 @@
     <p><a href="{% if block %}{% url content_blocks_edit block.name %}{% else %}{% url content_blocks_edit name %}{% endif %}" class="content-block-edit">{% trans "Edit" %}</a></p>
 {% endif %}
 
-{% if markup %}</div>{% endif %}
+{% if not just_content %}</div>{% endif %}
