@@ -2,12 +2,14 @@
 
 {% if not content_mode %}<div{% if perms.content_blocks and editable %} class="content-block"{% endif %}>{% endif %}
 
-{% if block.content %}
-    {% if markup %}
-        {{ block.content|markdown }}
-    {% else %}
-        {{ block.content }}
-    {% endif %}
+{% if content.content %}
+    {% block content %}
+        {% if markup %}
+            {{ content.content|markdown }}
+        {% else %}
+            {{ content.content }}
+        {% endif %}
+    {% endblock %}
 {% else %}
     {% if DEBUG %}
         {% if markup %}<p>{% endif %}
@@ -21,7 +23,7 @@
 {% endif %}
 
 {% if perms.content_blocks and editable %}
-    <p><a href="{% if block %}{% url content_blocks_edit block.name %}{% else %}{% url content_blocks_edit name %}{% endif %}" class="content-block-edit">{% trans "Edit" %}</a></p>
+    <p><a href="{% if content %}{% url content_blocks_content_block_edit content.name %}{% else %}{% url content_blocks_content_block_edit name %}{% endif %}" class="content-block-edit">{% trans "Edit" %}</a></p>
 {% endif %}
 
 {% if not just_content %}</div>{% endif %}

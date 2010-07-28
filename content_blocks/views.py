@@ -2,30 +2,26 @@ from django.conf import settings
 from django.contrib.auth.decorators import permission_required
 from django.views.generic import simple
 
-from content_blocks.forms import ContentBlockForm
-from content_blocks.models import ContentBlockCore, ContentBlock
+from content_blocks.forms import ContentBlockForm, ImageBlockForm
+from content_blocks.models import ContentBlockCore, ContentBlock, ImageBlockCore, ImageBlock
 from content_blocks.utils import get_admin_edit_page
 
 
-@permission_required("content_blocks.contentblock")
-def edit(request, name):
-    """
-    Edit view for a ContentBlock object, creates the block if it doesn't exist
-    """
-    block_core, __unused__ = ContentBlockCore.objects.get_or_create(name=name)
-    block, __unused__ = ContentBlock.objects.get_or_create(
+def _block_edit(request, model_name, name, model_class_core, model_class, form_class):
+    block_core, __unused__ = model_class_core.objects.get_or_create(name=name)
+    block, __unused__ = model_class.objects.get_or_create(
         core=block_core,
         language=request.LANGUAGE_CODE,
     )
 
     if request.is_ajax():
         if request.method == "POST":
-            form = ContentBlockForm(request.POST, instance=block)
+            form = form_class(request.POST, instance=block)
 
             if form.is_valid():
                 block = form.save()
 
-                return simple.direct_to_template(request, "content_blocks/block.html", extra_context={
+                return simple.direct_to_template(request, "content_blocks/%s.html" % model_name, extra_context={
                     "block": block,
                     "content_mode": True,
                     "editable": True,
@@ -33,7 +29,7 @@ def edit(request, name):
                     "DEBUG": settings.DEBUG,
                 })
         elif request.GET.has_key("cancel"):
-            return simple.direct_to_template(request, "content_blocks/block.html", extra_context={
+            return simple.direct_to_template(request, "content_blocks/%s.html" % model_name, extra_context={
                 "block": block,
                 "just_content": True,
                 "editable": True,
@@ -41,11 +37,31 @@ def edit(request, name):
                 "DEBUG": settings.DEBUG,
             })
         else:
-            form = ContentBlockForm(instance=block)
+            form = form_class(instance=block)
 
-        return simple.direct_to_template(request, "content_blocks/edit.html", extra_context={
+        return simple.direct_to_template(request, "content_blocks/%s_edit.html" % model_name, extra_context={
             "form": form,
             "block": block,
         })
     else:
         return simple.redirect_to(request, get_admin_edit_page(block))
+
+
+@permission_required("content_blocks.contentblock")
+def content_block_edit(request, name):
+    """
+    Edit view for a ContentBlock object, creates the block if it doesn't exist
+    """
+    return _block_edit(
+        request, 'content_block', name,
+        ContentBlockCore, ContentBlock, ContentBlockForm)
+
+
+@permission_required("content_blocks.imageblock")
+def image_block_edit(request, name):
+    """
+    Edit view for a ImageBlock object, creates the block if it doesn't exist
+    """
+    return _block_edit(
+        request, 'image_block', name,
+        ImageBlockCore, ImageBlock, ImageBlockForm)

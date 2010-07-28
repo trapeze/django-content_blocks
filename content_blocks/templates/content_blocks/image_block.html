@@ -1,0 +1,26 @@
+{% load i18n markup webdesign %}
+
+{% if not content_mode %}<div{% if perms.content_blocks and editable %} class="image-block"{% endif %}>{% endif %}
+
+{% if image.image_file %}
+    {% block image %}
+        {% if image.link %}
+             <a href="{{ image.link }}">
+        {% endif %}
+        <img src="{{ image.image_file.url }}" alt="{{ image.alternate_text }}" />
+        {% if image.link %}
+             </a>
+        {% endif %}
+    {% endblock %}
+{% else %}
+    {% if DEBUG %}
+        {# TODO display image placeholder or icon or something #}
+        <span style="font-size:64px">&#9888;</span>
+    {% endif %}
+{% endif %}
+
+{% if perms.content_blocks and editable %}
+    <p><a href="{% if image %}{% url content_blocks_image_block_edit image.name %}{% else %}{% url content_blocks_image_block_edit name %}{% endif %}" class="image-block-edit">{% trans "Edit" %}</a></p>
+{% endif %}
+
+{% if not just_content %}</div>{% endif %}
