@@ -51,6 +51,7 @@ simply load the tag library and call it as such:
 
     {% load content_blocks_tags %}
     {% show_content_block "about" %}
+    {% show_image_block "ceo" %}
 
 ``show_content_block`` only requires the unique identifier name of the block by
 default. You can also provide three optional parameters: ``editable``,
@@ -65,3 +66,8 @@ get the standard paragraph of approximately 70 words).
 
 To enable JavaScript functionality, you should import the JS enhancement app for
 content blocks.
+
+``show_image_block`` optionally takes a template name to override the
+the template used to render the image block on a per image block basis:
+
+    {% show_image_block "ceo" True "ceo_image_block.html" %}
