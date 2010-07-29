@@ -1,3 +1,15 @@
+content_blocks-1.1.1ALPHA
+=========================
+
+Tagged on July 29, 2010 by David Sauve <dsauve@trapeze.com>
+
+Minor Code Changes
+------------------
+
+* 001011-359 - Add tag for return content_block content in plain text
+
+* * *
+
 content_blocks-1.1.0ALPHA
 =========================
 
