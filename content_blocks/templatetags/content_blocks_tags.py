@@ -39,6 +39,30 @@ def show_content_block(context, name, editable=True, markup=True, amount=''):
     }
 
 
+@register.tag
+def show_content_block_as_text(parser, token):
+    try:
+        tag_name, block_name = token.split_contents()
+    except ValueError:
+        raise template.TemplateSyntaxError, "%r tag requires a single argument." % token.contents.split_contents()[0]
+    return ShowContentBlockAsTextNode(block_name)
+
+
+class ShowContentBlockAsTextNode(template.Node):
+    def __init__(self, block_name):
+        self.block_name = template.Variable(block_name)
+
+    def render(self, context):
+        try:
+            block = ContentBlock.objects.get(
+                core__name=self.block_name.resolve(context),
+                language=context.get("LANGUAGE_CODE", None)
+            )
+        except ContentBlock.DoesNotExist:
+            return ''
+        return block.content
+
+
 @register.inclusion_tag('content_blocks/_image_block.html', takes_context=True)
 def show_image_block(context, name, editable=True, template='content_blocks/image_block.html'):
     try:
