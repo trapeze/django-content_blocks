@@ -2,13 +2,13 @@
 
 {% if not content_mode %}<div{% if perms.content_blocks and editable %} class="image-block"{% endif %}>{% endif %}
 
-{% if image.image_file %}
+{% if image_block.image_file %}
     {% block image %}
-        {% if image.link %}
-             <a href="{{ image.link }}">
+        {% if image_block.link %}
+             <a href="{{ image_block.link }}">
         {% endif %}
-        <img src="{{ image.image_file.url }}" alt="{{ image.alternate_text }}" />
-        {% if image.link %}
+        <img src="{{ image_block.image_file.url }}" alt="{{ image_block.alternate_text }}" />
+        {% if image_block.link %}
              </a>
         {% endif %}
     {% endblock %}
@@ -20,7 +20,7 @@
 {% endif %}
 
 {% if perms.content_blocks and editable %}
-    <p><a href="{% if image %}{% url content_blocks_image_block_edit image.name %}{% else %}{% url content_blocks_image_block_edit name %}{% endif %}" class="image-block-edit">{% trans "Edit" %}</a></p>
+    <p><a href="{% if image_block %}{% url content_blocks_image_block_edit image_block.name %}{% else %}{% url content_blocks_image_block_edit name %}{% endif %}" class="image-block-edit">{% trans "Edit" %}</a></p>
 {% endif %}
 
 {% if not just_content %}</div>{% endif %}

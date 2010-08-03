@@ -22,7 +22,7 @@ def _block_edit(request, model_name, name, model_class_core, model_class, form_c
                 block = form.save()
 
                 return simple.direct_to_template(request, "content_blocks/%s.html" % model_name, extra_context={
-                    "block": block,
+                    "%s" % model_name: block,
                     "content_mode": True,
                     "editable": True,
                     "markup": True,
@@ -30,7 +30,7 @@ def _block_edit(request, model_name, name, model_class_core, model_class, form_c
                 })
         elif request.GET.has_key("cancel"):
             return simple.direct_to_template(request, "content_blocks/%s.html" % model_name, extra_context={
-                "block": block,
+                "%s" % model_name: block,
                 "just_content": True,
                 "editable": True,
                 "markup": True,
@@ -41,7 +41,7 @@ def _block_edit(request, model_name, name, model_class_core, model_class, form_c
 
         return simple.direct_to_template(request, "content_blocks/%s_edit.html" % model_name, extra_context={
             "form": form,
-            "block": block,
+            "%s" % model_name: block,
         })
     else:
         return simple.redirect_to(request, get_admin_edit_page(block))
