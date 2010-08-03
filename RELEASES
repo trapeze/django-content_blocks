@@ -1,3 +1,15 @@
+content_blocks-1.1.2ALPHA
+=========================
+
+Tagged on July 29, 2010 by Tamas Kemenczy <tkemenczy@trapeze.com>
+
+Bugs Fixes and Small Enhancements
+---------------------------------
+
+* 001011-363  TemplateSyntaxError raised for content_block ajax views
+
+* * *
+
 content_blocks-1.1.1ALPHA
 =========================
 
