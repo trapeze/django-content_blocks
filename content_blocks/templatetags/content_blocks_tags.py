@@ -28,7 +28,7 @@ def show_content_block(context, name, editable=True, markup=True, amount=''):
 
     return {
         "name": name,
-        "content": block,
+        "content_block": block,
         "editable": (editable is True or editable == "True"),
         "markup": (markup is True or markup == "True"),
         "perms": context.get("perms", None),
@@ -75,7 +75,7 @@ def show_image_block(context, name, editable=True, template='content_blocks/imag
 
     return {
         'name': name,
-        'image': block,
+        'image_block': block,
         'editable': (editable is True or editable == 'True'),
         'template': template,
         'perms': context.get('perms', None),
