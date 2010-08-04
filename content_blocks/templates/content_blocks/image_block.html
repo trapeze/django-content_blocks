@@ -20,7 +20,7 @@
 {% endif %}
 
 {% if perms.content_blocks and editable %}
-    <p><a href="{% if image_block %}{% url content_blocks_image_block_edit image_block.name %}{% else %}{% url content_blocks_image_block_edit name %}{% endif %}" class="image-block-edit">{% trans "Edit" %}</a></p>
+    <p class="image-block-edit"><a href="{% if image_block %}{% url content_blocks_image_block_edit image_block.name %}{% else %}{% url content_blocks_image_block_edit name %}{% endif %}">{% trans "Change picture" %}</a></p>
 {% endif %}
 
 {% if not just_content %}</div>{% endif %}
