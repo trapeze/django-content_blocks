@@ -1,3 +1,17 @@
+content_blocks-1.1.3ALPHA
+=========================
+
+Tagged on August 5, 2010 by Teddy Hwang <thwang@trapeze.com>
+
+Bugs Fixes and Small Enhancements
+---------------------------------
+
+* 001011-161  The AJAX view for content blocks always returns with markdown turned on
+* Removed conditional wrapper for image block since it's always required for JS enhancement
+* Added in edit link for image block without image
+
+* * *
+
 content_blocks-1.1.2ALPHA
 =========================
 
