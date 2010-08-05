@@ -1,9 +1,11 @@
 {% load i18n markup webdesign %}
 
-{% if markup and not content_mode %}
-    {% if not content_mode %}<div{% if perms.content_blocks and editable %} class="content-block"{% endif %}>{% endif %}
-{% else %}
-    {% if not content_mode %}<span{% if perms.content_blocks and editable %} class="content-block"{% endif %}>{% endif %}
+{% if wrapper %}
+    {% if markup %}
+        <div{% if perms.content_blocks and editable %} class="content-block"{% endif %}>
+    {% else %}
+        <span{% if perms.content_blocks and editable %} class="content-block"{% endif %}>
+    {% endif %}
 {% endif %}
 
 {% if content_block.content %}
@@ -27,11 +29,13 @@
 {% endif %}
 
 {% if perms.content_blocks and editable %}
-    <a href="{% if content_block %}{% url content_blocks_content_block_edit content_block.name %}{% else %}{% url content_blocks_content_block_edit name %}{% endif %}" class="content-block-edit">{% trans "Edit" %}</a>
+<a href="{% if content_block %}{% url content_blocks_content_block_edit content_block.name %}{% else %}{% url content_blocks_content_block_edit name %}{% endif %}?markup={{ markup }}" class="content-block-edit">{% trans "Edit" %}</a>
 {% endif %}
 
-{% if markup and not content_mode %}
-    {% if not just_content %}</div>{% endif %}
-{% else %}
-    {% if not just_content %}</span>{% endif %}
+{% if wrapper %}
+    {% if markup %}
+        </div>
+    {% else %}
+        </span>
+    {% endif %}
 {% endif %}

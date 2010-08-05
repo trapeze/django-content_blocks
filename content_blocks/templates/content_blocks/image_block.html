@@ -1,6 +1,6 @@
 {% load i18n markup webdesign %}
 
-{% if not content_mode %}<div{% if perms.content_blocks and editable %} class="image-block"{% endif %}>{% endif %}
+{% if wrapper %}<div{% if perms.content_blocks and editable %} class="image-block"{% endif %}>{% endif %}
 
 {% if image_block.image_file %}
     {% block image %}
@@ -14,13 +14,11 @@
     {% endblock %}
 {% else %}
     {% if DEBUG %}
-        {# TODO display image placeholder or icon or something #}
         <span style="font-size:64px">&#9888;</span>
     {% endif %}
 {% endif %}
-
 {% if perms.content_blocks and editable %}
-    <p class="image-block-edit"><a href="{% if image_block %}{% url content_blocks_image_block_edit image_block.name %}{% else %}{% url content_blocks_image_block_edit name %}{% endif %}">{% trans "Change picture" %}</a></p>
+<p class="{% if image_block.image_file %}image-block-edit{% endif %}"><a href="{% if image_block %}{% url content_blocks_image_block_edit image_block.name %}{% else %}{% url content_blocks_image_block_edit name %}{% endif %}">{% trans "Change picture" %}</a></p>
 {% endif %}
 
-{% if not just_content %}</div>{% endif %}
+{% if wrapper %}</div>{% endif %}

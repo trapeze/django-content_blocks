@@ -14,6 +14,7 @@ def _block_edit(request, model_name, name, model_class_core, model_class, form_c
         language=request.LANGUAGE_CODE,
     )
 
+    markup = request.GET.get("markup", "True") == "True"
     if request.is_ajax():
         if request.method == "POST":
             form = form_class(request.POST, instance=block)
@@ -23,17 +24,17 @@ def _block_edit(request, model_name, name, model_class_core, model_class, form_c
 
                 return simple.direct_to_template(request, "content_blocks/%s.html" % model_name, extra_context={
                     "%s" % model_name: block,
-                    "content_mode": True,
+                    "wrapper": False,
                     "editable": True,
-                    "markup": True,
+                    "markup": markup,
                     "DEBUG": settings.DEBUG,
                 })
         elif request.GET.has_key("cancel"):
             return simple.direct_to_template(request, "content_blocks/%s.html" % model_name, extra_context={
                 "%s" % model_name: block,
-                "just_content": True,
+                "wrapper": False,
                 "editable": True,
-                "markup": True,
+                "markup": markup,
                 "DEBUG": settings.DEBUG,
             })
         else:
@@ -42,6 +43,7 @@ def _block_edit(request, model_name, name, model_class_core, model_class, form_c
         return simple.direct_to_template(request, "content_blocks/%s_edit.html" % model_name, extra_context={
             "form": form,
             "%s" % model_name: block,
+            "markup": markup,
         })
     else:
         return simple.redirect_to(request, get_admin_edit_page(block))

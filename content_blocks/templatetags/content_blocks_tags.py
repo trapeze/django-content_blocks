@@ -29,6 +29,7 @@ def show_content_block(context, name, editable=True, markup=True, amount=''):
     return {
         "name": name,
         "content_block": block,
+        "wrapper": True,
         "editable": (editable is True or editable == "True"),
         "markup": (markup is True or markup == "True"),
         "perms": context.get("perms", None),
