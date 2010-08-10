@@ -20,7 +20,15 @@
     {% if DEBUG %}
         {% if markup %}<p>{% endif %}
         {% if amount %}
-            {% lorem amount w %}
+            {% ifequal method "p" %}
+                {% lorem amount p %}
+            {% else %}
+                {% ifequal method "w" %}
+                    {% lorem amount w %}
+                {% else %}
+                    {% lorem amount %}
+                {% endifequal %}
+            {% endifequal %}
         {% else %}
             {% lorem %}
         {% endif %}
