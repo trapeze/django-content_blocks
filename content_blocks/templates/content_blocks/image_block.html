@@ -18,7 +18,7 @@
     {% endif %}
 {% endif %}
 {% if perms.content_blocks and editable %}
-<p class="{% if image_block.image_file %}image-block-edit{% endif %}"><a href="{% if image_block %}{% url content_blocks_image_block_edit image_block.name %}{% else %}{% url content_blocks_image_block_edit name %}{% endif %}">{% trans "Change picture" %}</a></p>
+<p class="{% if image_block.image_file %}image-block-edit{% else %}default-image-edit{% endif %}"><a href="{% if image_block %}{% url content_blocks_image_block_edit image_block.name %}{% else %}{% url content_blocks_image_block_edit name %}{% endif %}">{% trans "Change picture" %}</a></p>
 {% endif %}
 
 </div>

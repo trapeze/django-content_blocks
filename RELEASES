@@ -1,3 +1,10 @@
+content_blocks-1.1.5ALPHA
+=========================
+
+Tagged on August 11, 2010 by Teddy Hwang <thwang@trapeze.com>
+
+* Added in class for default image so popup window would work with JS enhancement app
+
 content_blocks-1.1.4ALPHA
 =========================
 
