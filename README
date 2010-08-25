@@ -27,13 +27,6 @@ included in ``django.contrib``:
         'content_blocks',
     )
 
-You will also have to create a symbolic link called `content_blocks` in your
-`MEDIA_ROOT` folder. It should link to `content_blocks/media`. For example:
-
-    cd <path-to-project-media--root-folder>
-    ln -s <path-to-content-blocks>/media/ content_blocks
-
-
 The second step is to include content_blocks.urls in your urls.py:
 
     urlpatterns = patterns('',
