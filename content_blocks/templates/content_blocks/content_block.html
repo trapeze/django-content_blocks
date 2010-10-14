@@ -4,7 +4,9 @@
     {% if markup %}
         <div{% if perms.content_blocks and editable %} class="content-block"{% endif %}>
     {% else %}
-        <span{% if perms.content_blocks and editable %} class="content-block"{% endif %}>
+        {% if perms.content_blocks and editable %}
+        <span class="content-block">
+        {% endif %}
     {% endif %}
 {% endif %}
 
@@ -44,6 +46,8 @@
     {% if markup %}
         </div>
     {% else %}
+        {% if perms.content_blocks and editable %}
         </span>
+        {% endif %}
     {% endif %}
 {% endif %}
