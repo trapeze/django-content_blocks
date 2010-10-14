@@ -1,3 +1,14 @@
+content_blocks-1.1.6BETA
+=========================
+
+Tagged on Oct 14, 2010 by Monika Piotrowicz <mpiotrowicz@trapeze.com>
+
+Minor Code Changes
+------------------
+* 001011-497 - Content Blocks - extra markup is added to non-markup blocks
+
+* * *
+
 content_blocks-1.1.5STABLE
 =========================
 
