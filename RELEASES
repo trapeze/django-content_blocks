@@ -1,3 +1,15 @@
+content_blocks-UNRELEASED
+=========================
+
+Tagged on XX XX, 20XX by XX XX <XX@trapeze.com>
+
+Minor Code Changes
+------------------
+* 001011-513 - Content Blocks: Add Linguo to applications required by content blocks
+
+
+* * *
+
 content_blocks-2.0.0ALPHA
 =========================
 
