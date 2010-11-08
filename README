@@ -16,21 +16,24 @@ Installation
 To install Content Blocks, include it in your ``INSTALLED_APPS`` list, under
 your project's settings.py file.
 
+Multilingual support is powered by Linguo Django application.
+
 To render the content using markdown and show placeholder text when DEBUG is set
 to True, the app depends on ``markup`` and ``webdesign`` applications,
-included in ``django.contrib``:
+included in ``django.contrib``.
 
     INSTALLED_APPS = (
         'django.contrib.markup',
         'django.contrib.webdesign',
 
+        'linguo',
         'content_blocks',
     )
 
 The second step is to include content_blocks.urls in your urls.py:
 
     urlpatterns = patterns('',
-        turl(_(r'^content-blocks/'), include('content_blocks.urls')),
+        url(_(r'^content-blocks/'), include('content_blocks.urls')),
     )
 
 After running ./manage.py syncdb, app will be ready to use.
