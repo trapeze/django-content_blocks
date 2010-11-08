@@ -28,7 +28,7 @@ class ImageBlock(MultilingualModel):
     An editable Image Block.
     """
     name = models.SlugField(_("Name"), max_length=255, unique=True)
-    image_file = models.FileField(upload_to='files/images', verbose_name=_('image file'))
+    image = models.FileField(upload_to='files/images', verbose_name=_('image file'))
     alternate_text = models.CharField(max_length=255, blank=True, verbose_name=_('alternate text'))
     link = models.CharField(max_length=255, blank=True, verbose_name=_('link'))
 
@@ -37,7 +37,7 @@ class ImageBlock(MultilingualModel):
     class Meta:
         verbose_name = _('Image Block')
         verbose_name_plural = _('Image Blocks')
-        translate = ('image_file',)
+        translate = ('image',)
 
     def __unicode__(self):
         return self.name

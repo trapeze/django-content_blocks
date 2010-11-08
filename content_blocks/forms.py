@@ -18,4 +18,4 @@ class ImageBlockForm(forms.ModelForm):
     """
     class Meta:
         model = ImageBlock
-        fields = ('image_file', 'alternate_text', 'link')
+        fields = ('image', 'alternate_text', 'link')

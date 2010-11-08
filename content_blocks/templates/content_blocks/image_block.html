@@ -2,12 +2,12 @@
 
 <div{% if perms.content_blocks and editable %} class="image-block"{% endif %}>
 
-{% if image_block.image_file %}
+{% if image_block.image %}
     {% block image %}
         {% if image_block.link %}
              <a href="{{ image_block.link }}">
         {% endif %}
-        <img src="{{ image_block.image_file.url }}" alt="{{ image_block.alternate_text }}" />
+        <img src="{{ image_block.image.url }}" alt="{{ image_block.alternate_text }}" />
         {% if image_block.link %}
              </a>
         {% endif %}
@@ -18,7 +18,7 @@
     {% endif %}
 {% endif %}
 {% if perms.content_blocks and editable %}
-<p class="{% if image_block.image_file %}image-block-edit{% else %}default-image-edit{% endif %}"><a href="{% if image_block %}{% url content_blocks_image_block_edit image_block.name %}{% else %}{% url content_blocks_image_block_edit name %}{% endif %}">{% trans "Change picture" %}</a></p>
+<p class="{% if image_block.image %}image-block-edit{% else %}default-image-edit{% endif %}"><a href="{% if image_block %}{% url content_blocks_image_block_edit image_block.name %}{% else %}{% url content_blocks_image_block_edit name %}{% endif %}">{% trans "Change picture" %}</a></p>
 {% endif %}
 
 </div>
