@@ -9,8 +9,8 @@ class ContentBlock(MultilingualModel):
     """
     An editable content block.
     """
-    name = models.SlugField(_("Name"), max_length=255, unique=True)
-    content = models.TextField(_("Content"), blank=True)
+    name = models.SlugField(_("name"), max_length=255, unique=True)
+    content = models.TextField(_("content"), blank=True)
 
     objects = MultilingualManager()
 
@@ -25,12 +25,12 @@ class ContentBlock(MultilingualModel):
 
 class ImageBlock(MultilingualModel):
     """
-    An editable Image Block.
+    An editable image block.
     """
-    name = models.SlugField(_("Name"), max_length=255, unique=True)
-    image = models.FileField(upload_to='files/images', verbose_name=_('image file'))
-    alternate_text = models.CharField(max_length=255, blank=True, verbose_name=_('alternate text'))
-    link = models.CharField(max_length=255, blank=True, verbose_name=_('link'))
+    name = models.SlugField(_("name"), max_length=255, unique=True)
+    image = models.FileField(_('image file'), upload_to='files/images')
+    alternate_text = models.CharField(_('alternate text'), max_length=255, blank=True)
+    link = models.CharField(_('link'), max_length=255, blank=True)
 
     objects = MultilingualManager()
 

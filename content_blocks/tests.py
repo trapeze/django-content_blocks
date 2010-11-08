@@ -20,29 +20,26 @@ class ContentBlockTestCase(TestCase):
         self.user.save()
         self.client.login(username='test', password='test')
 
-    def testEditExistingBlock(self):
+    def test_edit_existing_block_redirects(self):
         block = ContentBlock.objects.create(name='test')
-
         url = reverse(
-            'content_blocks_content_block_edit', kwargs={'name':'test'}
+            'content_blocks_content_block_edit', kwargs={'name': 'test'}
         )
         response = self.client.get(url)
-
         expected = reverse(
-                'admin:content_blocks_contentblock_change',
-                args=(block.pk,))
+            'admin:content_blocks_contentblock_change', args=(block.pk,)
+        )
         self.assertRedirects(response, expected, status_code=301)
 
-    def testEditNonExistentBlock(self):
+    def test_edit_non_existent_block_redirects(self):
         url = reverse(
-            'content_blocks_content_block_edit', kwargs={'name': 'test-2'}
+            'content_blocks_content_block_edit', kwargs={'name': 'test-new'}
         )
         response = self.client.get(url)
-        block = ContentBlock.objects.get(name='test-2')
-
+        block = ContentBlock.objects.get(name='test-new')
         expected = reverse(
-                'admin:content_blocks_contentblock_change',
-                args=(block.pk,))
+            'admin:content_blocks_contentblock_change', args=(block.pk,)
+        )
         self.assertRedirects(response, expected, status_code=301)
 
 
@@ -54,31 +51,26 @@ class ImageBlockTestCase(TestCase):
         )
         self.user.set_password('test')
         self.user.save()
-
         self.client.login(username='test', password='test')
 
-    def testEditExistingBlock(self):
+    def test_edit_existing_block_redirect(self):
         block = ImageBlock.objects.create(name='test')
-
         url = reverse(
-            'content_blocks_image_block_edit', kwargs={'name':'test'}
+            'content_blocks_image_block_edit', kwargs={'name': 'test'}
         )
         response = self.client.get(url)
-
         expected = reverse(
-                'admin:content_blocks_imageblock_change',
-                args=(block.pk,))
+            'admin:content_blocks_imageblock_change', args=(block.pk,)
+        )
         self.assertRedirects(response, expected, status_code=301)
 
-    def testEditNonExistentBlock(self):
+    def test_edit_non_existent_block_redirects(self):
         url = reverse(
             'content_blocks_image_block_edit', kwargs={'name':'test-2',}
         )
         response = self.client.get(url)
-
         block = ImageBlock.objects.get(name='test-2')
-
         expected = reverse(
-                'admin:content_blocks_imageblock_change',
-                args=(block.pk,))
+            'admin:content_blocks_imageblock_change', args=(block.pk,)
+        )
         self.assertRedirects(response, expected, status_code=301)

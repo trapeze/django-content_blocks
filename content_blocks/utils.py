@@ -18,5 +18,6 @@ def get_admin_edit_page(instance):
     app_label = instance.__class__._meta.app_label
     model_name = instance.__class__.__name__
     return reverse(
-            'admin:%s_%s_change' % (app_label, model_name.lower()),
-            args=(instance.pk,))
+        'admin:%s_%s_change' % (app_label, model_name.lower()),
+        args=(instance.pk,)
+    )
