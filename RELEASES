@@ -1,3 +1,17 @@
+content_blocks-2.0.0ALPHA
+=========================
+
+Tagged on November 8, 2010 by Sylvain Toe <stoe@trapeze.com>
+
+Minor Code Changes
+------------------
+* 001011-511 - Content Blocks: Use Linguo as the multilingual solution
+* 001011-512 - Content Blocks: Renamed image field
+
+
+* * *
+
+
 content_blocks-1.1.6BETA
 =========================
 
