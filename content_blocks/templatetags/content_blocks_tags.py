@@ -39,10 +39,7 @@ def show_content_block(context, name, editable=True, markup=True, amount='', met
         
     """
     try:
-        block = ContentBlock.objects.get(
-            core__name=name,
-            language=context.get("LANGUAGE_CODE", None)
-        )
+        block = ContentBlock.objects.get(name=name)
     except ContentBlock.DoesNotExist:
         block = None
 
@@ -72,10 +69,7 @@ def show_content_block(context, name, editable=True, markup=True, amount='', met
 @register.inclusion_tag('content_blocks/_image_block.html', takes_context=True)
 def show_image_block(context, name, editable=True, template='content_blocks/image_block.html'):
     try:
-        block = ImageBlock.objects.get(
-            core__name=name,
-            language=context.get('LANGUAGE_CODE', None)
-        )
+        block = ImageBlock.objects.get(name=name)
     except ImageBlock.DoesNotExist:
         block = None
 

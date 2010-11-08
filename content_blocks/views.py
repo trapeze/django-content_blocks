@@ -3,16 +3,12 @@ from django.contrib.auth.decorators import permission_required
 from django.views.generic import simple
 
 from content_blocks.forms import ContentBlockForm, ImageBlockForm
-from content_blocks.models import ContentBlockCore, ContentBlock, ImageBlockCore, ImageBlock
+from content_blocks.models import ContentBlock, ImageBlock
 from content_blocks.utils import get_admin_edit_page
 
 
-def _block_edit(request, model_name, name, model_class_core, model_class, form_class):
-    block_core, __unused__ = model_class_core.objects.get_or_create(name=name)
-    block, __unused__ = model_class.objects.get_or_create(
-        core=block_core,
-        language=request.LANGUAGE_CODE,
-    )
+def _block_edit(request, model_name, name, model_class, form_class):
+    block, __unused__ = model_class.objects.get_or_create(name=name)
 
     markup = request.GET.get("markup", "True") == "True"
     if request.is_ajax():
@@ -55,8 +51,8 @@ def content_block_edit(request, name):
     Edit view for a ContentBlock object, creates the block if it doesn't exist
     """
     return _block_edit(
-        request, 'content_block', name,
-        ContentBlockCore, ContentBlock, ContentBlockForm)
+        request, 'content_block', name, ContentBlock, ContentBlockForm
+    )
 
 
 @permission_required("content_blocks.imageblock")
@@ -65,5 +61,5 @@ def image_block_edit(request, name):
     Edit view for a ImageBlock object, creates the block if it doesn't exist
     """
     return _block_edit(
-        request, 'image_block', name,
-        ImageBlockCore, ImageBlock, ImageBlockForm)
+        request, 'image_block', name, ImageBlock, ImageBlockForm
+    )
