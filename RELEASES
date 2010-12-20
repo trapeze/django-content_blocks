@@ -1,11 +1,12 @@
-content_blocks-UNRELEASED
-=========================
+content_blocks-2.0.1STABLE
+==========================
 
-Tagged on XX XX, 20XX by XX XX <XX@trapeze.com>
+Tagged on December 20, 2010, by Sylvain Toe <stoe@trapeze.com>
 
 Minor Code Changes
 ------------------
 * 001011-513 - Content Blocks: Add Linguo to applications required by content blocks
+* 001011-487 - content_blocks requires multilang but not listed in __init__.py
 
 
 * * *
