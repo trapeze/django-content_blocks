@@ -5,6 +5,7 @@ from django.core.exceptions import ImproperlyConfigured
 REQUIRED_APPS = (
     'django.contrib.markup',
     'django.contrib.webdesign',
+    'linguo',
 )
 
 
