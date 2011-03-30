@@ -2,7 +2,7 @@
 
 {% if wrapper %}
     {% if markup %}
-        <div{% if perms.content_blocks and editable %} class="content-block"{% endif %}>
+        <div class="ug-content{% if perms.content_blocks and editable %} content-block{% endif %}">
     {% else %}
         {% if perms.content_blocks and editable %}
         <span class="content-block">
