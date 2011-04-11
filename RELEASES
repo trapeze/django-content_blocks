@@ -1,3 +1,35 @@
+content_blocks-2.1.0ALPHA
+=========================
+
+Tagged on April 11, 2011 by Zach Mathew <zmathew@trapeze.com>
+
+
+Major Code Changes
+------------------
+* None
+
+
+Bugs Fixes and Small Enhancements
+---------------------------------
+* Made content_blocks csrf protection compatible
+* Added initial south migration, requires linguo-1.1.0ALPHA or higher
+
+
+Upgrade Instructions
+--------------------
+* You will need to install linguo-1.1.0ALPHA or higher
+
+
+Known issues
+------------
+* None
+
+
+
+* * *
+
+
+
 content_blocks-2.0.2RC
 =========================
 
