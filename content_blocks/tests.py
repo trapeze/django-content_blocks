@@ -1,3 +1,5 @@
+import datetime
+
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.models import User
@@ -41,7 +43,19 @@ class ContentBlockTestCase(TestCase):
             'admin:content_blocks_contentblock_change', args=(block.pk,)
         )
         self.assertRedirects(response, expected, status_code=301)
-
+        
+    def test_create_new_content_block_object_sets_modification_date(self):
+        now = datetime.datetime.now()
+        block = ContentBlock.objects.create(name='test', modification_date=now)
+        self.assertTrue(block.modification_date,  now)
+        
+    def test_update_content_block_object_sets_modification_date(self):
+        now = datetime.datetime.now()
+        block = ContentBlock.objects.create(name='test')
+        block.modification_date=now
+        block.save()
+        self.assertTrue(block.modification_date,  now)
+        
 
 class ImageBlockTestCase(TestCase):
 

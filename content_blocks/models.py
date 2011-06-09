@@ -11,6 +11,7 @@ class ContentBlock(MultilingualModel):
     """
     name = models.SlugField(_("name"), max_length=255, unique=True)
     content = models.TextField(_("content"), blank=True)
+    modification_date = models.DateTimeField(_('modification date'), auto_now=True)
 
     objects = MultilingualManager()
 
