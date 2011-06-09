@@ -15,8 +15,8 @@ class ContentBlockAdmin(admin.ModelAdmin):
     def export_selected_objects(self, request, queryset):
         selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
         ct = ContentType.objects.get_for_model(queryset.model)
-        response = HttpResponse(mimetype="text/javascript")
-        response['Content-Disposition'] = u'attachment; filename=contentblocks_%s' % \
+        response = HttpResponse(mimetype="application/json")
+        response['Content-Disposition'] = u'attachment; filename=content_blocks-%s.json' % \
         (datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
         
         serializers.serialize("json", queryset, stream=response)
