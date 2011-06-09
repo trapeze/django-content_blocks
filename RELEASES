@@ -21,7 +21,7 @@ Upgrade Instructions
 
 Known issues
 ------------
-* None
+* content_blocks: Ability to export a selected list of content blocks to a json file
 
 
 
