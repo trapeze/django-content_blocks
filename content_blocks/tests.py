@@ -45,16 +45,18 @@ class ContentBlockTestCase(TestCase):
         self.assertRedirects(response, expected, status_code=301)
         
     def test_create_new_content_block_object_sets_modification_date(self):
-        now = datetime.datetime.now()
-        block = ContentBlock.objects.create(name='test', modification_date=now)
-        self.assertTrue(block.modification_date,  now)
+        before = datetime.datetime.now()
+        block = ContentBlock.objects.create(name='test')
+        after = datetime.datetime.now()
+        self.assertTrue(block.modification_date > before and block.modification_date < after)
         
     def test_update_content_block_object_sets_modification_date(self):
         now = datetime.datetime.now()
         block = ContentBlock.objects.create(name='test')
-        block.modification_date=now
+        block.name='test1'
         block.save()
-        self.assertTrue(block.modification_date,  now)
+        after = datetime.datetime.now()
+        self.assertTrue(block.modification_date > before and block.modification_date < after)
         
 
 class ImageBlockTestCase(TestCase):
