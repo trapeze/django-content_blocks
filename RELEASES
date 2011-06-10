@@ -1,3 +1,36 @@
+content_blocks-2.3.0ALPHA
+=========================
+
+Tagged on June 10, 2011 by Kelly Lee <klee@trapeze.com>
+
+
+Major Code Changes
+------------------
+* South migration removed from this app
+
+
+Bugs Fixes and Small Enhancements
+---------------------------------
+* Content blocks depends on there being two languages
+
+
+Upgrade Instructions
+--------------------
+* For previously installed:
+  - content_blocks does not use south migration any more.
+  - You may want to compare db schema manually and updated 
+    if there's any db schema change after the existing version.
+
+
+Known issues
+------------
+* None
+
+
+
+* * *
+
+
 content_blocks-2.2.0ALPHA
 =========================
 
