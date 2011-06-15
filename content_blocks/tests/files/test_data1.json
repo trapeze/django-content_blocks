@@ -1,0 +1,21 @@
+[
+    {
+        "pk": 1,
+        "model": "content_blocks.contentblock",
+        "fields": {
+            "name": "block_name",
+            "content": "Some text!",
+            "modification_date": "2011-06-15 13:25:43"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "content_blocks.contentblock",
+        "fields": {
+            "name": "another_block",
+            "content": "Some More Text!",
+            "modification_date": "2011-06-15 13:25:56"
+        }
+    }
+]
+

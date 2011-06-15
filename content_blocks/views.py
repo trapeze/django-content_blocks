@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.contrib.auth.decorators import permission_required
+from django.contrib import messages
+from django.core import serializers
 from django.views.generic import simple
 
 from content_blocks.forms import ContentBlockForm, ImageBlockForm
 from content_blocks.models import ContentBlock, ImageBlock
-from content_blocks.utils import get_admin_edit_page
+from content_blocks.utils import get_admin_list_page, get_admin_edit_page
 
 
 def _block_edit(request, model_name, name, model_class, form_class):
@@ -63,3 +65,28 @@ def image_block_edit(request, name):
     return _block_edit(
         request, 'image_block', name, ImageBlock, ImageBlockForm
     )
+
+@permission_required("content_blocks.contentblock")
+def content_block_json_upload(request):
+    """
+    Upload a group of ContentBlocks in JSON format
+    """
+    if 'json_data' in request.FILES:
+        try:
+            for new_block in serializers.deserialize('json', request.FILES['json_data'].read()):
+                existing_query = ContentBlock.objects.filter(name=new_block.object.name)
+                if existing_query:
+                    existing_block = existing_query.get()
+                    new_block.object.id = existing_block.id
+                    new_block.save()
+                    continue
+
+                else:
+                    new_block.object.id = None
+                    new_block.save()
+
+            messages.success(request, 'JSON Content Blocks Successfully imported.')
+        except ValueError:
+            messages.error(request, 'JSON File Invalid')
+    
+    return simple.redirect_to(request, get_admin_list_page(ContentBlock))
