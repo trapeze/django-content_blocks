@@ -1,3 +1,35 @@
+content_blocks-2.4.0ALPHA
+=========================
+
+Tagged on June 16, 2011 by Jared Kerim <jkerim@trapeze.com>
+
+
+Major Code Changes
+------------------
+* Allow for JSON files containing Content Blocks to be uploaded in the CMS
+
+
+Bugs Fixes and Small Enhancements
+---------------------------------
+* None
+
+
+Upgrade Instructions
+--------------------
+* For previously installed:
+  - content_blocks does not use south migration any more.
+  - You may want to compare db schema manually and updated 
+    if there's any db schema change after the existing version.
+
+
+Known issues
+------------
+* None
+
+
+
+* * *
+
 content_blocks-2.3.0ALPHA
 =========================
 

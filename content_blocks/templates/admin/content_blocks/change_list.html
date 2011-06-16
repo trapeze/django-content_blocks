@@ -18,60 +18,23 @@
 </script>
 {% endblock %}
 
-{% block content %}
+{% block object-tools %}
   <form id="json_upload_form" method="POST" action="{% url content_blocks_json_upload %}" enctype="multipart/form-data" style="visibility:hidden">
     {% csrf_token %}
     <input id="json_upload_file" type="file" name="json_data" />
   </form>
-  <div id="content-main">
-    {% block object-tools %}
-      {% if has_add_permission %}
-        <ul class="object-tools">
-          <li>
-            <a href="" id="json_upload_button" class="addlink">
-              {% blocktrans with cl.opts.verbose_name as name %}Upload JSON {{ name }}{% endblocktrans %}
-            </a>
-          </li>
-          <li>
-            <a href="add/{% if is_popup %}?_popup=1{% endif %}" class="addlink">
-              {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-            </a>
-          </li>
-        </ul>
-      {% endif %}
-    {% endblock %}
-    {% if cl.formset.errors %}
-        <p class="errornote">
-        {% blocktrans count cl.formset.errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %} 
-        </p>
-        {{ cl.formset.non_form_errors }}
-    {% endif %}
-    <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
-      {% block search %}{% search_form cl %}{% endblock %}
-      {% block date_hierarchy %}{% date_hierarchy cl %}{% endblock %}
-
-      {% block filters %}
-        {% if cl.has_filters %}
-          <div id="changelist-filter">
-            <h2>{% trans 'Filter' %}</h2>
-            {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
-          </div>
-        {% endif %}
-      {% endblock %}
-
-      <form id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %}>{% csrf_token %}
-      {% if cl.formset %}
-        {{ cl.formset.management_form }}
-      {% endif %}
-
-      {% block result_list %}
-          {% if action_form and actions_on_top and cl.full_result_count %}{% admin_actions %}{% endif %}
-          {% result_list cl %}
-          {% if action_form and actions_on_bottom and cl.full_result_count %}{% admin_actions %}{% endif %}
-      {% endblock %}
-      {% block pagination %}{% pagination cl %}{% endblock %}
-      </form>
-    </div>
-  </div>
+  {% if has_add_permission %}
+    <ul class="object-tools">
+      <li>
+        <a href="" id="json_upload_button" class="addlink">
+          {% blocktrans with cl.opts.verbose_name as name %}Upload JSON {{ name }}{% endblocktrans %}
+        </a>
+      </li>
+      <li>
+        <a href="add/{% if is_popup %}?_popup=1{% endif %}" class="addlink">
+          {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+        </a>
+      </li>
+    </ul>
+  {% endif %}
 {% endblock %}
-
