@@ -1,3 +1,33 @@
+content_blocks-2.4.1ALPHA
+=========================
+
+Tagged on July 11, 2011 by Darie Petrov <dpetrov@trapeze.com>
+
+
+Major Code Changes
+------------------
+* None
+
+
+Bugs Fixes and Small Enhancements
+---------------------------------
+* Updated linguo import to work with the latest version of linguo 1.2.0STABLE
+
+
+Upgrade Instructions
+--------------------
+* If using the linguo application, upgrade to 1.2.0STABLE or above.
+
+
+Known issues
+------------
+* None
+
+
+
+* * *
+
+
 content_blocks-2.4.0ALPHA
 =========================
 
