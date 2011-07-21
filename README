@@ -14,7 +14,7 @@ Installation
 ------------
 
 To install Content Blocks, include it in your ``INSTALLED_APPS`` list, under
-your project's settings.py file.
+your project's settings.py file. Install `markdown.py` as well.
 
 Multilingual support is powered by Linguo Django application.
 
