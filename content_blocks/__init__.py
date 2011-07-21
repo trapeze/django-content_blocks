@@ -17,3 +17,11 @@ if __name__ in settings.INSTALLED_APPS:
                 __name__,
                 application_name,
             ))
+
+    try:
+        import markdown
+    except ImportError:
+        raise ImproperlyConfigured("%s application requires markdown. "
+        "Please install it in your path (for example, as ../lib/markdown.py)" % (
+            __name__,
+        ))
