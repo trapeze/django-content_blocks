@@ -47,7 +47,7 @@ def _block_edit(request, model_name, name, model_class, form_class):
         return simple.redirect_to(request, get_admin_edit_page(block))
 
 
-@permission_required("content_blocks.contentblock")
+@permission_required("content_blocks.change_contentblock")
 def content_block_edit(request, name):
     """
     Edit view for a ContentBlock object, creates the block if it doesn't exist
@@ -57,7 +57,7 @@ def content_block_edit(request, name):
     )
 
 
-@permission_required("content_blocks.imageblock")
+@permission_required("content_blocks.change_imageblock")
 def image_block_edit(request, name):
     """
     Edit view for a ImageBlock object, creates the block if it doesn't exist
@@ -66,7 +66,7 @@ def image_block_edit(request, name):
         request, 'image_block', name, ImageBlock, ImageBlockForm
     )
 
-@permission_required("content_blocks.contentblock")
+@permission_required("content_blocks.change_contentblock")
 def content_block_json_upload(request):
     """
     Upload a group of ContentBlocks in JSON format

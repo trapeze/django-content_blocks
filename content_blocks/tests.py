@@ -2,7 +2,7 @@ import datetime
 
 from django.conf import settings
 from django.contrib import admin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils import translation
@@ -15,9 +15,9 @@ class ContentBlockTestCase(TestCase):
 
     def setUp(self):
         translation.activate(settings.LANGUAGES[0][0])
-        self.user = User.objects.create(username='test',
-            is_superuser=True, is_staff=True
-        )
+        self.user = User.objects.create(username='test', is_staff=True)
+        perm = Permission.objects.get(codename="change_contentblock")
+        self.user.user_permissions.add(perm)
         self.user.set_password('test')
         self.user.save()
         self.client.login(username='test', password='test')
@@ -148,9 +148,9 @@ class ContentBlockTestCase(TestCase):
 class ImageBlockTestCase(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create(username='test',
-            is_superuser=True, is_staff=True
-        )
+        self.user = User.objects.create(username='test', is_staff=True)
+        perm = Permission.objects.get(codename="change_imageblock")
+        self.user.user_permissions.add(perm)
         self.user.set_password('test')
         self.user.save()
         self.client.login(username='test', password='test')
