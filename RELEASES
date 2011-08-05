@@ -1,3 +1,17 @@
+content_blocks-2.4.3STABLE
+==========================
+
+Tagged on August 5th, 2011 by Syvlain Toe <stoe@trapeze.com>
+
+
+Bugs Fixes and Small Enhancements
+---------------------------------
+* 001011-631: Content Blocks: Users that don't have super user privilege can't edit in-line
+
+
+* * *
+
+
 content_blocks-2.4.2ALPHA
 =========================
 
