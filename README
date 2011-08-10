@@ -36,6 +36,14 @@ The second step is to include content_blocks.urls in your urls.py:
         url(_(r'^content-blocks/'), include('content_blocks.urls')),
     )
 
+Finally, you'll need to force admin into English mode or content blocks
+will not work properly when editing in other languages. (See ticket #001011-630 for more details). Append the following to `MIDDLEWARE_CLASSES` in settings.py:
+
+    MIDDLEWARE_CLASSES = (
+        # ...
+        'content_blocks.middleware.AdminForceEnglishMiddleware',
+    )
+
 After running ./manage.py syncdb, app will be ready to use.
 
 
