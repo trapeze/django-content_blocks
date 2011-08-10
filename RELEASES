@@ -1,3 +1,26 @@
+content_blocks-2.4.4STABLE
+==========================
+
+Tagged on August 10th, 2011 by David Cooper <dcooper@trapeze.com>
+
+
+Bugs Fixes and Small Enhancements
+---------------------------------
+* 001011-630: content_blocks: Editing content in admin when in non-English mode does not work
+
+Upgrade Instructions
+--------------------
+* Append the following to `MIDDLEWARE_CLASSES` in `settings.py`
+
+        MIDDLEWARE_CLASSES = (
+            # ...
+            'content_blocks.middleware.ForceEnglishInAdminMiddleware',
+        )
+
+
+* * *
+
+
 content_blocks-2.4.3STABLE
 ==========================
 
