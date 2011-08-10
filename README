@@ -41,7 +41,7 @@ will not work properly when editing in other languages. (See ticket #001011-630 
 
     MIDDLEWARE_CLASSES = (
         # ...
-        'content_blocks.middleware.AdminForceEnglishMiddleware',
+        'content_blocks.middleware.ForceEnglishInAdminMiddleware',
     )
 
 After running ./manage.py syncdb, app will be ready to use.
