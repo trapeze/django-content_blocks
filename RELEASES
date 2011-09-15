@@ -1,3 +1,34 @@
+content_blocks-2.4.5STABLE
+==========================
+
+Tagged on August 15th 2011, by Jared Kerim <jkerim@trapeze.com>
+
+
+Bugs Fixes and Small Enhancements
+---------------------------------
+* 001011-635: content_blocks: ImageBlock requires translatable links, alternate_text
+
+Upgrade Instructions
+--------------------
+* To upgrade your existing content blocks to this new structure, follow these instructions:
+
+    You will be required to export your content block content to JSON from the CMS, perform the following SQL queries:
+
+    psql -U <projectname>team <projectname>
+    drop table content_blocks_contentblock;
+    drop table content_blocks_imageblock;
+
+    Then install the new content_blocks as normal, perform the following command:
+
+    ./manage.py syncdb
+
+    Then re-import your content blocks data using the 'Upload JSON Content Block' button in the Content Blocks section of the CMS.
+
+
+* * *
+
+
+
 content_blocks-2.4.4STABLE
 ==========================
 

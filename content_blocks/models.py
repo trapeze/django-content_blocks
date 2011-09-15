@@ -38,7 +38,7 @@ class ImageBlock(MultilingualModel):
     class Meta:
         verbose_name = _('Image Block')
         verbose_name_plural = _('Image Blocks')
-        translate = ('image',)
+        translate = ('image', 'alternate_text', 'link')
 
     def __unicode__(self):
         return self.name
