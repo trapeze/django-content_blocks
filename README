@@ -47,6 +47,108 @@ will not work properly when editing in other languages. (See ticket #001011-630 
 After running ./manage.py syncdb, app will be ready to use.
 
 
+Upgrade Instructions
+--------------------
+
+To upgrade Content Blocks from a pre-2.X version to 2.X you will need to follow these instructions.
+
+First you will need to export your existing data into a format which can be read by the new content blocks using the following script, which you should
+copy and paste into a Django console started with ./manage.py shell:
+
+---------------------------------------------------------------------------
+import json
+
+from content_blocks.models import ContentBlockCore, ImageBlockCore
+
+def export_content_blocks():
+    blocks = []
+    for block in ContentBlockCore.objects.all():
+        block_en = block.translations.filter(language='en').get()
+        block_fr = block.translations.filter(language='fr')
+        if block_fr:
+            block_fr = block_fr.get()
+        else:
+            block_fr = None
+        block_json = {
+            'pk'      : block.id,
+            'model'   : 'content_blocks.contentblock',
+            'fields'  : {
+                'name'        : block.name,
+                'content'     : block_en.content,
+                'content_fr'  : block_fr.content if block_fr else block_en.content,
+            },
+        }
+        blocks.append(block_json)
+    for block in ImageBlockCore.objects.all():
+        image_en = block.translations.filter(language='en').get()
+        image_fr = block.translations.filter(language='fr')
+        if image_fr:
+            image_fr = image_fr.get()
+        else:
+            image_fr = None
+        block_json = {
+            'pk'      : block.id,
+            'model'   : 'content_blocks.imageblock',
+            'fields'  : {
+                'name'                : block.name,
+                'link'                : image_en.link,
+                'link_fr'             : image_fr.link if image_fr else image_en.link,
+                'alternate_text'      : image_en.alternate_text,
+                'alternate_text_fr'   : image_fr.alternate_text if image_fr else image_en.alternate_text,
+                'image'               : ('files' + image_en.image_file.path.split('files')[1]) if image_en.image_file.name else '',
+                'image_fr'            : ('files' + image_fr.image_file.path.split('files')[1]) if image_fr and image_fr.image_file.name else '',
+            },
+        } 
+        blocks.append(block_json) 
+    outfile = open('content_blocks.json', 'w')
+    outfile.write(json.dumps(blocks))
+    outfile.close() 
+    print 'Done'
+
+export_content_blocks()
+---------------------------------------------------------------------------
+
+When that is complete it will print 'Done' and you can exit the shell.  
+Now you will find a file called 'content_blocks.json' in your project root, which contains the JSON
+formatted data for the projects Content and Image blocks.
+
+Add the latest Content Blocks to your project using
+
+    cd site/src
+    svn export https://office.trapeze.com/svn/DjangoApps/content_blocks/tags/content_blocks-<latest tag>/
+
+Add a symbolic link to it in lib
+
+    cd site/lib
+    ln -s ../src/content_blocks-<latest tag>/content_blocks/ content_blocks
+
+Now you will need to remove the old tables from the database.  
+If this is not a local deployment, make sure you perform a full backup before performing this step.
+
+    psql -U <projectname>team <projectname>_<site> 
+
+    drop table content_blocks_contentblock;
+    drop table content_blocks_contentblockcore;
+    drop table content_blocks_imageblock;
+    drop table content_blocks_imageblockcore;
+
+With the old tables gone, you can now create the new tables using
+
+    ./manage.py syncdb
+
+And answer yes when it asks if you want to remove the unused tables
+
+Finally we load our old data back into the database with
+
+    ./manage.py loaddata content_blocks.json
+
+Which should report that it loaded a number of objects from 1 fixture.
+
+Now ensure that the data was correctly loaded by going into the Admin 
+and looking at both the Content Blocks and Image Blocks sections.
+
+
+
 Template Tags
 -------------
 
