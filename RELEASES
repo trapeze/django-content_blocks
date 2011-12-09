@@ -1,3 +1,18 @@
+content_blocks-2.4.6RC
+======================
+
+Tagged on December 9, 2011 by asibley
+
+
+Bugs Fixes and Small Enhancements
+---------------------------------
+* fixed paths to test data
+* updated setup.py and added other packaging-related files
+
+
+* * *
+
+
 content_blocks-2.4.5STABLE
 ==========================
 
@@ -130,7 +145,7 @@ Upgrade Instructions
 --------------------
 * For previously installed:
   - content_blocks does not use south migration any more.
-  - You may want to compare db schema manually and updated 
+  - You may want to compare db schema manually and updated
     if there's any db schema change after the existing version.
 
 
@@ -162,7 +177,7 @@ Upgrade Instructions
 --------------------
 * For previously installed:
   - content_blocks does not use south migration any more.
-  - You may want to compare db schema manually and updated 
+  - You may want to compare db schema manually and updated
     if there's any db schema change after the existing version.
 
 
