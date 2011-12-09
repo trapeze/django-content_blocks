@@ -1,14 +1,15 @@
 import datetime
+import os
 
 from django.conf import settings
-from django.contrib import admin
 from django.contrib.auth.models import User, Permission
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils import translation
 
-
 from content_blocks.models import ContentBlock, ImageBlock
+
+TEST_FILES_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'tests', 'files'))
 
 
 class ContentBlockTestCase(TestCase):
@@ -43,26 +44,26 @@ class ContentBlockTestCase(TestCase):
             'admin:content_blocks_contentblock_change', args=(block.pk,)
         )
         self.assertRedirects(response, expected, status_code=301)
-        
+
     def test_create_new_content_block_object_sets_modification_date(self):
         before = datetime.datetime.now()
         block = ContentBlock.objects.create(name='test')
         after = datetime.datetime.now()
         self.assertTrue(block.modification_date > before and block.modification_date < after)
-        
+
     def test_update_content_block_object_sets_modification_date(self):
         before = datetime.datetime.now()
         block = ContentBlock.objects.create(name='test')
-        block.name='test1'
+        block.name = 'test1'
         block.save()
         after = datetime.datetime.now()
         self.assertTrue(block.modification_date > before and block.modification_date < after)
 
     def test_import_content_blocks_from_json_adds_new_content_blocks_to_the_db(self):
         post_data = {
-            'json_data': open('../lib/content_blocks/tests/files/test_data1.json'),
+            'json_data': open(os.path.join(TEST_FILES_PATH, 'test_data1.json')),
         }
-        
+
         url = reverse(
             'content_blocks_json_upload',
         )
@@ -78,13 +79,13 @@ class ContentBlockTestCase(TestCase):
         self.assertEquals(ContentBlock.objects.get(name='another_block').content, 'Some More Text!')
 
     def test_import_content_blocks_from_json_with_existing_slugs_updates_content_blocks_in_the_db(self):
-        block1 = ContentBlock.objects.create(name='block1', content='content1')
-        block2 = ContentBlock.objects.create(name='block2', content='content2')
-        
+        ContentBlock.objects.create(name='block1', content='content1')
+        ContentBlock.objects.create(name='block2', content='content2')
+
         post_data = {
-            'json_data': open('../lib/content_blocks/tests/files/test_data2.json'),
+            'json_data': open(os.path.join(TEST_FILES_PATH, 'test_data2.json')),
         }
-        
+
         url = reverse(
             'content_blocks_json_upload',
         )
@@ -100,13 +101,13 @@ class ContentBlockTestCase(TestCase):
         self.assertEquals(ContentBlock.objects.get(name='block2').content, 'newcontent2')
 
     def test_import_content_blocks_with_existing_id_but_different_slug_does_not_overwrite_existing_content_block(self):
-        block1 = ContentBlock.objects.create(name='block1', content='content1')
-        block2 = ContentBlock.objects.create(name='block2', content='content2')
-        
+        ContentBlock.objects.create(name='block1', content='content1')
+        ContentBlock.objects.create(name='block2', content='content2')
+
         post_data = {
-            'json_data': open('../lib/content_blocks/tests/files/test_data3.json'),
+            'json_data': open(os.path.join(TEST_FILES_PATH, 'test_data3.json')),
         }
-        
+
         url = reverse(
             'content_blocks_json_upload',
         )
@@ -121,15 +122,15 @@ class ContentBlockTestCase(TestCase):
         self.assertEquals(ContentBlock.objects.get(name='block1').content, 'content1')
         self.assertEquals(ContentBlock.objects.get(name='block2').content, 'newcontent2')
         self.assertEquals(ContentBlock.objects.get(name='block3').content, 'newcontent3')
-    
+
     def test_invalid_json_file_redirects_and_displays_error(self):
-        block1 = ContentBlock.objects.create(name='block1', content='content1')
-        block2 = ContentBlock.objects.create(name='block2', content='content2')
-        
+        ContentBlock.objects.create(name='block1', content='content1')
+        ContentBlock.objects.create(name='block2', content='content2')
+
         post_data = {
-            'json_data': open('../lib/content_blocks/tests/files/invalid_data.json'),
+            'json_data': open(os.path.join(TEST_FILES_PATH, 'invalid_data.json')),
         }
-        
+
         url = reverse(
             'content_blocks_json_upload',
         )
@@ -168,7 +169,7 @@ class ImageBlockTestCase(TestCase):
 
     def test_edit_non_existent_block_redirects(self):
         url = reverse(
-            'content_blocks_image_block_edit', kwargs={'name':'test-2',}
+            'content_blocks_image_block_edit', kwargs={'name': 'test-2'}
         )
         response = self.client.get(url)
         block = ImageBlock.objects.get(name='test-2')
