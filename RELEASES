@@ -1,3 +1,16 @@
+content_blocks-2.4.7STABLE
+======================
+
+Tagged on January 17, 2011 by fbeaufort
+
+
+Bugs Fixes and Small Enhancements
+---------------------------------
+* Fixed tests when multiple permissions have the same name
+
+
+* * *
+
 content_blocks-2.4.6RC
 ======================
 
