@@ -3,6 +3,7 @@ import os
 
 from django.conf import settings
 from django.contrib.auth.models import User, Permission
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils import translation
@@ -17,7 +18,8 @@ class ContentBlockTestCase(TestCase):
     def setUp(self):
         translation.activate(settings.LANGUAGES[0][0])
         self.user = User.objects.create(username='test', is_staff=True)
-        perm = Permission.objects.get(codename="change_contentblock")
+        ct = ContentType.objects.get_for_model(ContentBlock)
+        perm = Permission.objects.get(codename="change_contentblock", content_type=ct)
         self.user.user_permissions.add(perm)
         self.user.set_password('test')
         self.user.save()
