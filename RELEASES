@@ -1,3 +1,18 @@
+content_blocks-2.4.8STABLE
+==========================
+
+Tagged on February 16, 2011 by fbeaufort
+
+
+Bugs Fixes
+----------
+
+* Raises DeserializationError instead of ValueError when deserializing JSON for django-1.4
+
+
+* * *
+
+
 content_blocks-2.4.7STABLE
 ======================
 
@@ -10,6 +25,7 @@ Bugs Fixes and Small Enhancements
 
 
 * * *
+
 
 content_blocks-2.4.6RC
 ======================

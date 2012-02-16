@@ -87,7 +87,7 @@ def content_block_json_upload(request):
                     new_block.save()
 
             messages.success(request, 'JSON Content Blocks Successfully imported.')
-        except DeserializationError:
+        except (DeserializationError, ValueError):  # NOTE: ValueError is caught only for Django<=1.3
             messages.error(request, 'JSON File Invalid')
-    
+
     return simple.redirect_to(request, get_admin_list_page(ContentBlock))
