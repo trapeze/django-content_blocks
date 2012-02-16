@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import permission_required
 from django.contrib import messages
 from django.core import serializers
+from django.core.serializers.base import DeserializationError
 from django.views.generic import simple
 
 from content_blocks.forms import ContentBlockForm, ImageBlockForm
@@ -86,7 +87,7 @@ def content_block_json_upload(request):
                     new_block.save()
 
             messages.success(request, 'JSON Content Blocks Successfully imported.')
-        except ValueError:
+        except DeserializationError:
             messages.error(request, 'JSON File Invalid')
     
     return simple.redirect_to(request, get_admin_list_page(ContentBlock))
