@@ -51,7 +51,7 @@ class ContentBlockTestCase(TestCase):
         before = datetime.datetime.now()
         block = ContentBlock.objects.create(name='test')
         after = datetime.datetime.now()
-        self.assertTrue(block.modification_date > before and block.modification_date < after)
+        self.assertTrue(block.modification_date >= before and block.modification_date <= after)
 
     def test_update_content_block_object_sets_modification_date(self):
         before = datetime.datetime.now()
@@ -59,7 +59,7 @@ class ContentBlockTestCase(TestCase):
         block.name = 'test1'
         block.save()
         after = datetime.datetime.now()
-        self.assertTrue(block.modification_date > before and block.modification_date < after)
+        self.assertTrue(block.modification_date >= before and block.modification_date <= after)
 
     def test_import_content_blocks_from_json_adds_new_content_blocks_to_the_db(self):
         post_data = {
