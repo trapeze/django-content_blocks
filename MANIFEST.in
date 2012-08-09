@@ -1,5 +1,5 @@
 recursive-include content_blocks/tests *
-include README
+include README.md
 include CHANGES
 include LICENSE
 include AUTHORS
