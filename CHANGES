@@ -1,0 +1,6 @@
+django-content_blocks-3.0.0
+===========================
+
+Released on 9 August 2012
+
+* Raises DeserializationError instead of ValueError when deserializing JSON for django-1.4

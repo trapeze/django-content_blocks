@@ -112,15 +112,7 @@ When that is complete it will print 'Done' and you can exit the shell.
 Now you will find a file called 'content_blocks.json' in your project root, which contains the JSON
 formatted data for the projects Content and Image blocks.
 
-Add the latest Content Blocks to your project using
-
-    cd site/src
-    svn export https://office.trapeze.com/svn/DjangoApps/content_blocks/tags/content_blocks-<latest tag>/
-
-Add a symbolic link to it in lib
-
-    cd site/lib
-    ln -s ../src/content_blocks-<latest tag>/content_blocks/ content_blocks
+Add the latest version of Content Blocks to your project.
 
 Now you will need to remove the old tables from the database.  
 If this is not a local deployment, make sure you perform a full backup before performing this step.

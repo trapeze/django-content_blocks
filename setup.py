@@ -16,13 +16,9 @@ See README for more details.
 from setuptools import setup
 import os
 
-__version__ = file(os.path.join(os.path.dirname(__file__), 'RELEASES')).readline().strip().split('-')[1]
-
-# setup(name=_name, version=_version, packages=[_name])
-
 setup(
-    name='content_blocks',
-    version=__version__,
+    name='django-content_blocks',
+    version='3.0.0',
     description='Template tags for editable content block areas.',
     long_description=__doc__,
     packages=['content_blocks', 'content_blocks.templatetags'],
@@ -30,12 +26,13 @@ setup(
     install_requires=['django >= 1.3', 'django-linguo', 'markdown'],
     zip_safe=False,
     platforms='any',
+    license='LICENSE',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Framework :: Django',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
-        'License :: Other/Proprietary License',
+        'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries',

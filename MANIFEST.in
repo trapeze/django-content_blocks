@@ -1,3 +1,5 @@
 recursive-include content_blocks/tests *
 include README
-include RELEASES
+include CHANGES
+include LICENSE
+include AUTHORS
